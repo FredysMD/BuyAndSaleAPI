@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\APIController;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+use App\Models\User;
+
+class UserController extends APIController
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +17,10 @@ class UserController extends Controller
     public function index()
     {
         //
-    }
+        $users = User::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->showAll($users);
+
     }
 
     /**
@@ -36,6 +32,23 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $rules =[
+          'name' => 'required',
+          'email' => 'required|email|unique:users',
+          'password' => 'required|min:6|confirmed' 
+        ];
+
+        $this->validate($request, $rules);
+
+        $fields = $request->all();
+        $fields['password'] = bcrypt($request->password);
+        $fields['verified'] = User::NOT_VERIFIED_USER;
+        $fields['verification_token'] = User::generateVerificactionToken();
+        $fields['admin'] = User::NOT_ADMIN_USER;
+
+        $user = User::create($fields);
+
+        return $this->showOne($user,201);
     }
 
     /**
@@ -47,17 +60,10 @@ class UserController extends Controller
     public function show($id)
     {
         //
-    }
+        $user = User::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->showOne($user);
+
     }
 
     /**
@@ -69,7 +75,46 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+        $user = User::findOrFail($id);
+
+        $rules =[
+          'email' => 'email|unique:users,email,'.$user->id,
+          'password' => 'min:6|confirmed',
+          'admin' => 'in:'.User::NOT_ADMIN_USER.','.User::ADMIN_USER,
+        ];
+
+        $this->validate($request, $rules);
+
+        if ($request->name) {
+            $user->name = $request->name;
+        }
+
+        if($request->email && $user->email != $request->email){
+
+            $user->verified = User::NOT_VERIFIED_USER;
+            $user->verification_token = User::generateVerificactionToken();
+            $user->email = $request->email;
+        }
+
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+
+        if ($request->admin){
+            
+            if (!$user->isVerified()) {
+                return $this->errorResponse('No se encuentra verificado el usuario', 409);
+            }
+        }
+
+        if (!$user->isDirty()) {
+            return $this->errorResponse('Se debe especificar al menos un dato a actualizar', 402);
+        }
+
+        $user->save();
+
+        return $this->showOne($user, 201);
     }
 
     /**
@@ -81,5 +126,10 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return response()->json(['data' => $user], 201);
     }
 }

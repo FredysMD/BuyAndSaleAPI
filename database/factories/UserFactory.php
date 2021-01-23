@@ -28,6 +28,9 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'verified' => $verified = $this->faker->randomElement([User::VERIFIED_USER, User::NOT_VERIFIED_USER]),
+            'verification_token' => $verified == User::VERIFIED_USER ? null : User::generateVerificactionToken(),
+            'admin' => $this->faker->randomElement([User::ADMIN_USER, User::NOT_ADMIN_USER]),
         ];
     }
 }

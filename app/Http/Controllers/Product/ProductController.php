@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\APIController;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductController extends APIController
 {
     /**
      * Display a listing of the resource.
