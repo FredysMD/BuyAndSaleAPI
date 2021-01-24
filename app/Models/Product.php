@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Category;
 use App\Models\Seller;
@@ -11,7 +12,7 @@ use App\Models\Transaction;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     const ENABLE_PRODUCT = 'enable product';
     const DISABLE_PRODUCT = 'disable product';
@@ -26,6 +27,7 @@ class Product extends Model
     	'seller_id',
 
     ];
+    protected $dates  = ['deleted_at'];
 
     public function isEnable()
     {
