@@ -16,10 +16,15 @@ class Category extends Model
     	'name',
     	'description',
     ];
+
+    protected $hidden = [
+        'pivot'
+    ];
+    
     protected $dates  = ['deleted_at'];    
 
     public function products()
     {
-    	return $this->belongToMany(Product::class);
+    	return $this->belongsToMany(Product::class);
     }
 }
