@@ -19,14 +19,11 @@ use Illuminate\Support\Facades\Route;
 **/
 
 Route::resource('buyers', 'App\Http\Controllers\Buyer\BuyerController', ['only' => ['index','show']]);
-
 Route::resource('buyers.transactions', 'App\Http\Controllers\Buyer\BuyerTransactionController', ['only' => ['index']]);
-
 Route::resource('buyers.products', 'App\Http\Controllers\Buyer\BuyerProductController', ['only' => ['index']]);
-
 Route::resource('buyers.sellers', 'App\Http\Controllers\Buyer\BuyerSellerController', ['only' => ['index']]);
-
 Route::resource('buyers.categories', 'App\Http\Controllers\Buyer\BuyerCategoryController', ['only' => ['index']]);
+
 /**
 /**
 /**
@@ -50,15 +47,17 @@ Route::resource('products', 'App\Http\Controllers\Product\ProductController', ['
 **/
 
 Route::resource('sellers', 'App\Http\Controllers\Seller\SellerController', ['only' => ['index','show']]);
+Route::resource('sellers.transactions', 'App\Http\Controllers\Seller\SellerTransactionController', ['only' => ['index']]);
+Route::resource('sellers.products', 'App\Http\Controllers\Seller\SellerProductController', ['except' => ['edit', 'show' ,'create']]);
+Route::resource('sellers.categories', 'App\Http\Controllers\Seller\SellerCategoryController', ['only' => ['index']]);
+Route::resource('sellers.buyers', 'App\Http\Controllers\Seller\SellerBuyerController', ['only' => ['index']]);
 
 /**
  	Transaction resources
 **/
 
 Route::resource('transactions', 'App\Http\Controllers\Transaction\TransactionController', ['only' => ['index','show']]);
-
 Route::resource('transactions.categories', 'App\Http\Controllers\Transaction\TransactionCategoryController', ['only' => ['index']]);
-
 Route::resource('transactions.sellers', 'App\Http\Controllers\Transaction\TransactionSellerController', ['only' => ['index']]);
 
 

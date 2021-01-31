@@ -71,10 +71,10 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof HttpException) {
-            return $this->errorResponse($exception->getMessages(), $exception->getStatusCode());
+            return $this->errorResponse( "El identificador propocionado no corresponde con el dueño de el recurso", $exception->getStatusCode());
         }
 
-         if ($exception instanceof QueryException) {
+        if ($exception instanceof QueryException) {
             if($exception->errorInfo[1] == 1451){
                 return $this->errorResponse('No se puede eliminar el registro porque tiene relacion con otro recurso', 409);
             }

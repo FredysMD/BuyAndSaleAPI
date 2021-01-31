@@ -17,10 +17,10 @@ class CategorySellerController extends APIController
     {
         //
         $sellers = $category->products()->with('seller')
-            ->get()
-            ->pluck('seller')
-            ->unique()
-            ->values();
+                ->get()
+                ->pluck('seller')
+                ->unique()
+                ->values();
 
         return $this->showAll($sellers);
     }

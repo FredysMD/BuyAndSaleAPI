@@ -17,11 +17,11 @@ class CategoryTransactionController extends APIController
     {
         //
         $transactions = $category->products()
-            ->whereHas('transactions') // solo los productos que tengan transactions
-            ->with('transactions')
-            ->get()
-            ->pluck('transactions')
-            ->collapse();
+                    ->whereHas('transactions') // solo los productos que tengan transactions
+                    ->with('transactions')
+                    ->get()
+                    ->pluck('transactions')
+                    ->collapse();
 
         return $this->showAll($transactions); 
     }
