@@ -41,6 +41,10 @@ Route::resource('categories.buyers', 'App\Http\Controllers\Category\CategoryBuye
 **/
 
 Route::resource('products', 'App\Http\Controllers\Product\ProductController', ['only' => ['index','show']]);
+Route::resource('products.transactions', 'App\Http\Controllers\Product\ProductTransactionController', ['only' => ['index']]);
+Route::resource('products.buyers', 'App\Http\Controllers\Product\ProductBuyerController', ['only' => ['index']]);
+Route::resource('products.categories', 'App\Http\Controllers\Product\ProductCategoryController', ['only' => ['index', 'update', 'destroy']]);
+Route::resource('products.buyers.transactions', 'App\Http\Controllers\Product\ProductBuyerTransactionController', ['only' => ['store']]);
 
 /**
  	Seller resources

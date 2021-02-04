@@ -46,7 +46,7 @@ class SellerProductController extends APIController
         $data = $request->all();
 
         $data['status'] = Product::DISABLE_PRODUCT;
-        $data['image']  = '1.jpg';
+        $data['image']  = $request->image->store('');
         $data['seller_id'] = $seller->id;
 
         $product = Product::create($data);
@@ -88,6 +88,14 @@ class SellerProductController extends APIController
                 return $this->errorResponse('El identificador suministrado no concuerda con el del dueño del producto', 409);
         }
 
+        if($request->hasFile('iamge')){
+            
+            Storage::delete($product->image);
+
+            $product->image = $request->image->store('');
+
+        }
+
         if($product->isClean())
             return $this->errorResponse('Debes especificar al menos un valor diferente', 422);
 
@@ -107,6 +115,8 @@ class SellerProductController extends APIController
     {
         //
         $this->validateSeller($seller, $product);
+
+        Storage::delete($product->image);
 
         $product->delete();
 
