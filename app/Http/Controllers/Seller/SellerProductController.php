@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Seller;
 
 
 use App\Http\Controllers\APIController;
-use App\Models\Seller;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Storage;
 
 class SellerProductController extends APIController
 {
@@ -17,7 +17,7 @@ class SellerProductController extends APIController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Seller $seller)
+    public function index(User $seller)
     {
         //
         $products = $seller->products;
@@ -111,7 +111,7 @@ class SellerProductController extends APIController
      * @param  \App\Models\Seller  $seller
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seller $seller, Product $product)
+    public function destroy(User $seller, Product $product)
     {
         //
         $this->validateSeller($seller, $product);
@@ -124,7 +124,7 @@ class SellerProductController extends APIController
 
     }
 
-    protected function validateSeller(Seller $seller, Product $product)
+    protected function validateSeller(User $seller, Product $product)
     {
         
         if($seller->id != $product->seller_id)

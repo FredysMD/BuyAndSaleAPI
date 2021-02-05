@@ -70,3 +70,6 @@ Route::resource('transactions.sellers', 'App\Http\Controllers\Transaction\Transa
 **/
 
 Route::resource('users', 'App\Http\Controllers\User\UserController', ['except' => ['create','edit']]);
+
+Route::name('verify')->get('users/verify/{token}', 'App\Http\Controllers\User\UserController@verify');
+Route::name('resend')->get('users/{user}/resend', 'App\Http\Controllers\User\UserController@resend');
