@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Buyer;
 use App\Models\Product;
+use App\Transformers\TransactionTransformer;
 
 class Transaction extends Model
 {
@@ -21,6 +22,8 @@ class Transaction extends Model
     ];
 
     protected $dates  = ['deleted_at'];
+
+    public $transformer = TransactionTransformer::class;
 
     public function buyer()
     {

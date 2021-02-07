@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\Product;
+use App\Transformers\CategoryTransformer;
 
 class Category extends Model
 {
@@ -21,7 +22,9 @@ class Category extends Model
         'pivot'
     ];
     
-    protected $dates  = ['deleted_at'];    
+    protected $dates  = ['deleted_at'];
+    
+    public $transformer  = CategoryTransformer::class;
 
     public function products()
     {

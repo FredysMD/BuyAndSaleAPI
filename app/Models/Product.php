@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Category;
 use App\Models\Seller;
 use App\Models\Transaction;
+use App\Transformers\ProductTransformer;
 
 class Product extends Model
 {
@@ -33,6 +34,8 @@ class Product extends Model
     ];
     
     protected $dates  = ['deleted_at'];
+
+    public $transformer = ProductTransformer::class;
 
     public function isEnable()
     {
