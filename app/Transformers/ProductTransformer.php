@@ -45,4 +45,21 @@ class ProductTransformer extends TransformerAbstract
             'updatedAt' => (string)$product->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes =  [
+            'identity' => 'id',
+            'title' => 'name',
+            'details' => 'description',
+            'enable' => 'quantity',
+            'status' => 'status',
+            'imagen' => 'image',
+            'seller' => 'seller_id',
+            'createdAt' => 'created_at',
+            'updatedAt' => 'updated_at',
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

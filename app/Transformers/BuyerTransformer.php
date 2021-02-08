@@ -41,4 +41,18 @@ class BuyerTransformer extends TransformerAbstract
             'updatedAt' => (string)$buyer->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes =  [
+            'identity' => 'id',
+            'name' => 'name',
+            'email' => 'email',
+            'verified' => 'verified',
+            'createdAt' => 'created_at',
+            'updatedAt' => 'updated_at',
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

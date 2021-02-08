@@ -40,4 +40,17 @@ class CategoryTransformer extends TransformerAbstract
             'updatedAt' => (string)$category->updated_at,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes =  [
+            'identity' => 'id',
+            'title' => 'name',
+            'details' => 'description',
+            'createdAt' => 'created_at',
+            'updatedAt' => 'updated_at',
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }
