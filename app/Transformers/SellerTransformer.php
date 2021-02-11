@@ -39,6 +39,31 @@ class SellerTransformer extends TransformerAbstract
             'verified' => (int)$seller->verified,
             'createdAt' => (string)$seller->created_at,
             'updatedAt' => (string)$seller->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('sellers.show', $seller->id),
+                ],
+
+                [
+                    'rel' => 'sellers.buyers',
+                    'href' => route('sellers.buyers.index', $seller->id),
+                ],
+
+                [
+                    'rel' => 'sellers.categories',
+                    'href' => route('sellers.categories.index', $seller->id),
+                ],
+                [
+                    'rel' => 'sellers.products',
+                    'href' => route('sellers.products.index', $seller->id),
+                ],
+                [
+                    'rel' => 'sellers.transactions',
+                    'href' => route('sellers.transactions.index', $seller->id),
+                ],
+            ]
         ];
     }
 

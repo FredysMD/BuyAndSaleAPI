@@ -40,6 +40,13 @@ class UserTransformer extends TransformerAbstract
             'admin' => ($user->admin === 'true'),
             'createdAt' => (string)$user->created_at,
             'updatedAt' => (string)$user->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('users.show', $user->id),
+                ],
+            ]
         ];
     }
 

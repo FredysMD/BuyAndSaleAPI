@@ -38,6 +38,31 @@ class CategoryTransformer extends TransformerAbstract
             'details' => (string)$category->description,
             'createdAt' => (string)$category->created_at,
             'updatedAt' => (string)$category->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('categories.show', $category->id),
+                ],
+
+                [
+                    'rel' => 'categories.buyers',
+                    'href' => route('categories.buyers.index', $category->id),
+                ],
+
+                [
+                    'rel' => 'categories.products',
+                    'href' => route('categories.products.index', $category->id),
+                ],
+                [
+                    'rel' => 'categories.sellers',
+                    'href' => route('categories.sellers.index', $category->id),
+                ],
+                [
+                    'rel' => 'categories.transactions',
+                    'href' => route('categories.transactions.index', $category->id),
+                ],
+            ]
         ];
     }
 

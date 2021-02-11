@@ -39,6 +39,31 @@ class TransactionTransformer extends TransformerAbstract
             'product' => (string)$transaction->product_id,
             'createdAt' => (string)$transaction->created_at,
             'updatedAt' => (string)$transaction->updated_at,
+
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('transactions.show', $transaction->id),
+                ],
+
+                [
+                    'rel' => 'transactions.buyers',
+                    'href' => route('transactions.buyers.index', $transaction->id),
+                ],
+
+                [
+                    'rel' => 'transactions.products',
+                    'href' => route('transactions.products.index', $transaction->id),
+                ],
+                [
+                    'rel' => 'transactions.sellers',
+                    'href' => route('transactions.sellers.index', $transaction->id),
+                ],
+                [
+                    'rel' => 'transactions.categories',
+                    'href' => route('transactions.categories.index', $transaction->id),
+                ],
+            ]
         ];
     }
 
