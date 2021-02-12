@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Seller;
 
 class SellerController extends APIController
-{
+{   
+
+    
     /**
      * Display a listing of the resource.
      *

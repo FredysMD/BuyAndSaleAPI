@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\APIController;
+use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -10,7 +11,13 @@ use App\Mail\UserCreated;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends APIController
-{
+{   
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('transform.input:' . UserTransformer::class)->only(['store','update']);
+    }
     /**
      * Display a listing of the resource.
      *
