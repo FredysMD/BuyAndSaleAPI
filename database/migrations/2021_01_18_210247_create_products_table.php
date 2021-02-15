@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description', 1000);
+            $table->string('price');
             $table->integer('quantity')->unsigned();
             $table->string('status')->default(Product::DISABLE_PRODUCT);
             $table->string('image');

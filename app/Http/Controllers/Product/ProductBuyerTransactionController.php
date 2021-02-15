@@ -58,6 +58,7 @@ class ProductBuyerTransactionController extends APIController
 
             $transaction = Transaction::create([
                 'quantity' => $request->quantity,
+                'total' => ($request->quantity * floatval($product->price)),
                 'buyer_id' => $buyer->id,
                 'product_id' => $product->id
             ]);

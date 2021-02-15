@@ -27,6 +27,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->word,
             'description' => $this->faker->paragraph(1),
             'quantity'=> $this->faker->numberBetween(1,10),
+            'price' => "10000",
             'status'=> $this->faker->randomElement([Product::ENABLE_PRODUCT, Product::DISABLE_PRODUCT]) ,
             'image' => $this->faker->randomElement(['1.jpg','2.jpg','3.jpg']),
             'seller_id' => User::all()->random()->id,

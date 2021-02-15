@@ -37,6 +37,7 @@ class TransactionTransformer extends TransformerAbstract
             'quantity' => (int)$transaction->quantity,
             'buyer' => (string)$transaction->buyer_id,
             'product' => (string)$transaction->product_id,
+            'total' => (string)$transaction->total,
             'createdAt' => (string)$transaction->created_at,
             'updatedAt' => (string)$transaction->updated_at,
 
@@ -44,16 +45,6 @@ class TransactionTransformer extends TransformerAbstract
                 [
                     'rel' => 'self',
                     'href' => route('transactions.show', $transaction->id),
-                ],
-
-                [
-                    'rel' => 'transactions.buyers',
-                    'href' => route('transactions.buyers.index', $transaction->id),
-                ],
-
-                [
-                    'rel' => 'transactions.products',
-                    'href' => route('transactions.products.index', $transaction->id),
                 ],
                 [
                     'rel' => 'transactions.sellers',
@@ -74,6 +65,7 @@ class TransactionTransformer extends TransformerAbstract
             'quantity' => 'quantity',
             'buyer' => 'buyer_id',
             'product' => 'product_id',
+            'total' => 'total',
             'createdAt' => 'created_at',
             'updatedAt' => 'updated_at',
         ];
@@ -88,6 +80,7 @@ class TransactionTransformer extends TransformerAbstract
            'quantity' => 'quantity',
            'buyer_id' => 'buyer',
            'product_id' => 'product',
+           'total' => 'total',
            'created_at' =>'createdAt',
            'updated_at' =>'updatedAt',
         ];

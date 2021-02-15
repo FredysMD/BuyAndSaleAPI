@@ -44,7 +44,8 @@ class SellerProductController extends APIController
             'name' => 'required',
             'description' =>'required',
             'quantity' => 'required|integer|min:1',
-            'image' => 'required|image'
+            'image' => 'required|image',
+            'price' => 'required|double',
         ];
 
         $this->validate($request, $rules);
@@ -74,7 +75,8 @@ class SellerProductController extends APIController
         $rules =[
             'status' => 'in: '.Product::DISABLE_PRODUCT, ','.Product::ENABLE_PRODUCT,
             'quantity' => 'integer|min:1',
-            'image' => 'image'
+            'image' => 'image',
+            'price' => 'required|double',
         ];
 
         $this->validate($request, $rules);
@@ -85,6 +87,7 @@ class SellerProductController extends APIController
             'name',
             'descrption',
             'quantity',
+            'price',
         ]));
 
         if($request->has('status')){
