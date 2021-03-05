@@ -56,4 +56,9 @@ class Product extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+    
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment')->whereNull('comment_parent_id');
+    }
 }

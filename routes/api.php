@@ -42,9 +42,11 @@ Route::resource('categories.buyers', 'App\Http\Controllers\Category\CategoryBuye
 
 Route::resource('products', 'App\Http\Controllers\Product\ProductController', ['only' => ['index','show']]);
 Route::resource('products.transactions', 'App\Http\Controllers\Product\ProductTransactionController', ['only' => ['index']]);
+Route::resource('products.comments', 'App\Http\Controllers\Product\ProductCommentController', ['only' => ['index']]);
 Route::resource('products.buyers', 'App\Http\Controllers\Product\ProductBuyerController', ['only' => ['index']]);
 Route::resource('products.categories', 'App\Http\Controllers\Product\ProductCategoryController', ['only' => ['index', 'update', 'destroy']]);
 Route::resource('products.buyers.transactions', 'App\Http\Controllers\Product\ProductBuyerTransactionController', ['only' => ['store']]);
+Route::resource('products.users.comments', 'App\Http\Controllers\Product\ProductUserCommentController', ['only' => ['store']]);
 
 /**
  	Seller resources
@@ -68,8 +70,18 @@ Route::resource('transactions.sellers', 'App\Http\Controllers\Transaction\Transa
 /**
  	User resources
 **/
-
 Route::resource('users', 'App\Http\Controllers\User\UserController', ['except' => ['create','edit']]);
-
 Route::name('verify')->get('users/verify/{token}', 'App\Http\Controllers\User\UserController@verify');
 Route::name('resend')->get('users/{user}/resend', 'App\Http\Controllers\User\UserController@resend');
+
+/**
+ 	Comment resources
+**/
+Route::resource('comments', 'App\Http\Controllers\Comment\CommentController', ['only' => ['index','show']]);
+
+
+/**
+ 	OAuth resources
+**/
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+

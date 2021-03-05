@@ -15,8 +15,9 @@ class UserController extends APIController
 
     public function __construct()
     {
-        parent::__construct();
+ 
         $this->middleware('transform.input:' . UserTransformer::class)->only(['store','update']);
+        $this->middleware('client.credentials')->only(['store', 'resend']);
     }
     /**
      * Display a listing of the resource.

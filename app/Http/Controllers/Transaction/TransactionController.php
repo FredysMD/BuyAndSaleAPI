@@ -17,7 +17,7 @@ class TransactionController extends APIController
     {
         //
         $transactions = Transaction::all();
-
+        dd($transactions);
         return $this->showAll($transactions);
 
     }

@@ -7,7 +7,14 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends APIController
-{
+{   
+
+    public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['index','show']);
+        $this->middleware('transform.input:' . CategoryTransformer::class)->only(['store','update']);
+    }
+    
     /**
      * Display a listing of the resource.
      *

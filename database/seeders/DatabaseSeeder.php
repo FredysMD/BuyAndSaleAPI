@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Comment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         Product::truncate();
         Transaction::truncate();
         User::truncate();
+        Comment::truncate();
         DB::table('category_product')->truncate();
 
         User::boot();
@@ -50,6 +52,8 @@ class DatabaseSeeder extends Seeder
         	);
         
         Transaction::factory()->count($transactionsQuantity)->create();
+
+        Comment::factory()->count($productsQuantity*5)->create();
 
         
     }

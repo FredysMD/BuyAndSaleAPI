@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 class ProductCategoryController extends APIController
 {   
 
+    public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
